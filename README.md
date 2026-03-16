@@ -1,4 +1,4 @@
 **One-command installation:**
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/AliRezaBeigy/slipstream-rust-deploy/master/slipstream-rust-deploy.sh)
+bash <(curl -Ls noelrubio143/sliptream/refs/heads/main/slipstream-rust-deploy.sh)
 ```
