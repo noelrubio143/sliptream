@@ -29,7 +29,7 @@ SCRIPT_INSTALL_PATH="/usr/local/bin/slipstream-rust-deploy"
 BUILD_DIR="/opt/slipstream-rust"
 REPO_URL="https://github.com/Mygod/slipstream-rust.git"
 SLIPSTREAM_PORT="5300"
-RELEASE_URL="https://github.com/noelrubio143/slipstream/releases/latest/download"
+RELEASE_URL="https://github"
 
 # Global variable to track if update is available
 UPDATE_AVAILABLE=false
