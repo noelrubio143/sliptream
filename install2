@@ -1,0 +1,105 @@
+#!/bin/bash
+
+# Banner for AMBER VPN Script
+echo "######################################################"
+echo "#                                                    #"
+echo "#             AMBER VPN DEPLOYMENT SCRIPT            #"
+echo "#              Automated Deployment for VPN         #"
+echo "#             Version 1.0                           #"
+echo "#         Developed by Your Name/Company            #"
+echo "#                                                    #"
+echo "######################################################"
+echo ""
+
+# User Account Management
+accounts=()
+
+add_account() {
+    read -p "Enter username: " username
+    if [[ " ${accounts[@]} " =~ " ${username} " ]]; then
+        echo "Account already exists."
+    else
+        read -sp "Enter password: " password
+        accounts+=("$username")
+        echo "$username:$password" >> accounts.txt
+        echo -e "\nAccount for $username added successfully!"
+    fi
+}
+
+delete_account() {
+    read -p "Enter username to delete: " username
+    if [[ " ${accounts[@]} " =~ " ${username} " ]]; then
+        accounts=("${accounts[@]/$username}")
+        sed -i "/^$username:/d" accounts.txt
+        echo "Account for $username deleted successfully!"
+    else
+        echo "Account for $username not found."
+    fi
+}
+
+list_accounts() {
+    if [ ${#accounts[@]} -gt 0 ]; then
+        echo -e "\nList of Accounts:"
+        for username in "${accounts[@]}"; do
+            echo "Username: $username"
+        done
+    else
+        echo "No accounts found."
+    fi
+}
+
+run_script() {
+    url="https://raw.githubusercontent.com/noelrubio143/sliptstream/refs/heads/main/slipstream-rust-deploy.sh"
+    
+    # Downloading the script using wget
+    echo "Downloading the AMBER VPN deployment script..."
+    wget -q $url -O slipstream-rust-deploy.sh
+
+    if [ $? -eq 0 ]; then
+        # Making the script executable
+        chmod +x slipstream-rust-deploy.sh
+        # Running the script
+        echo "Running the AMBER VPN deployment script..."
+        ./slipstream-rust-deploy.sh
+    else
+        echo "Failed to download the script. Please check the URL or your internet connection."
+    fi
+}
+
+menu() {
+    while true; do
+        echo -e "\nMenu:"
+        echo "1. Add Account"
+        echo "2. Delete Account"
+        echo "3. List Accounts"
+        echo "4. Download and Run the AMBER VPN Deployment Script"
+        echo "5. Exit"
+
+        read -p "Choose an option (1-5): " choice
+
+        case $choice in
+            1)
+                add_account
+                ;;
+            2)
+                delete_account
+                ;;
+            3)
+                list_accounts
+                ;;
+            4)
+                run_script
+                ;;
+            5)
+                echo "Exiting..."
+                break
+                ;;
+            *)
+                echo "Invalid choice. Please try again."
+                ;;
+        esac
+    done
+}
+
+# Start the menu
+menu
