@@ -4,5 +4,5 @@ curl -sSL https://raw.githubusercontent.com/noelrubio143/sliptream/refs/heads/ma
 ```
 # UNINSTALL SLIPSTREAM
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/noelrubio143/sliptream/refs/heads/main/slipstream-rust-deploy.sh) uninstall
+bash <(curl -Ls https://raw.githubusercontent.com/noelrubio143/sliptream/refs/heads/main/slipstream-rust-deploy.sh)
 ```
